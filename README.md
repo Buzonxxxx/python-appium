@@ -39,6 +39,7 @@ the activity is: `com.android.dialer.main.impl.MainActivity`
 #### Reference
 - python-client doc: https://appium.github.io/python-client-sphinx/
 - selenium doc: https://www.selenium.dev/documentation/
+- uiautomator UiSelector: https://developer.android.com/reference/androidx/test/uiautomator/UiSelector
 
 #### Snippets
 ```text
@@ -72,7 +73,9 @@ driver.press_keycode()
 Find Element
 driver.find_element(by=AppiumBy.XPATH, value='//android.widget.EditText[@text="First name"]')
 driver.find_element(by=AppiumBy.ID, value='com.google.android.dialer:id/one')
-
+driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value='text("First name")')
 
 
 ```
+
+

@@ -29,8 +29,10 @@ driver.find_element(by=AppiumBy.ID, value='android:id/button2').click()
 time.sleep(1)
 driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value='Create contact').click()
 
+# Use uiautomator uiselector
+driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value='text("First name")').send_keys("Harry")
+
 # Use customize XPATH
-driver.find_element(by=AppiumBy.XPATH, value='//android.widget.EditText[@text="First name"]').send_keys("Harry")
 driver.hide_keyboard()
 driver.find_element(by=AppiumBy.XPATH, value='//android.widget.EditText[@text="Phone"]').send_keys("098765")
 driver.find_element(by=AppiumBy.XPATH, value='//*[contains(@text, "Save")]').click()
