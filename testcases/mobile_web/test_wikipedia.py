@@ -2,9 +2,14 @@ import time
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.appium_service import AppiumService
-# from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+
+'''
+This script demonstrates how to start the Appium server programmatically, 
+interact with web elements (specifically dropdowns) in a mobile browser using Appium and Selenium, 
+and how to clean up by stopping the Appium server programmatically.
+'''
 
 capabilities = {
     'deviceName': 'Pixel 4 API 34',
@@ -14,6 +19,7 @@ capabilities = {
     'browserName': 'Chrome'
 }
 
+# Start Appium Server programmatically
 appium_service = AppiumService()
 appium_service.start()
 
@@ -26,6 +32,7 @@ options = UiAutomator2Options()
 options.load_capabilities(capabilities)
 
 driver = webdriver.Remote(appium_server_url, options=options, direct_connection=True)
+driver.implicitly_wait(5)
 
 driver.get('http://wikipedia.com')
 print(driver.title)

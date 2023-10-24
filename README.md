@@ -9,8 +9,24 @@
 #### Locate Elements
 - Open chrome://inspect/#devices on Chrome browser of your local machine
 
-#### kill process
-- kill $(lsof -t -i:4723)
+#### kill process`
+- `kill $(lsof -t -i:4723)`
+
+#### Get app package and activity
+```bash
+adb -s <device_serial_number> shell 
+dumpsys window windows | grep -E 'mTopActivityComponent'
+```
+the result should look like this
+```bash
+mTopActivityComponent=com.google.android.dialer/com.android.dialer.main.impl.MainActivity
+```
+the package is : `com.google.android.dialer`
+
+the activity is: `com.android.dialer.main.impl.MainActivity`
+
+#### Note
+- The `uiautomatorviewer` tool typically requires Java 8
 
 #### Reference
 - python-client doc: https://appium.github.io/python-client-sphinx/
