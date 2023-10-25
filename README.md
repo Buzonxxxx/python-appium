@@ -34,6 +34,7 @@ the activity is: `com.android.dialer.main.impl.MainActivity`
 - Path: `/sdcard/[Your apk]`
 #### Note
 - The `uiautomatorviewer` tool typically requires Java 8
+- Allow auto download chromedriver `appium server --allow-insecure chromedriver_autodownload`
 
 
 #### Reference

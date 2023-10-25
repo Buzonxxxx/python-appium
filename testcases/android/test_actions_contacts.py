@@ -6,7 +6,9 @@ from appium.webdriver.common.appiumby import AppiumBy
 from testcases.android.actions_util import ActionsUtil
 
 '''
-
+Demonstrates various mobile interactions within the Contacts application. 
+It leverages the Appium and Selenium libraries to automate user actions 
+such as clicking, dragging, dropping, and scrolling.
 '''
 
 capabilities = {
