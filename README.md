@@ -75,6 +75,14 @@ driver.find_element(by=AppiumBy.XPATH, value='//android.widget.EditText[@text="F
 driver.find_element(by=AppiumBy.ID, value='com.google.android.dialer:id/one')
 driver.find_element(by=AppiumBy.ANDROID_UIAUTOMATOR, value='text("First name")')
 
+Wait Method
+// explicit wait
+from selenium.webdriver.support import expected_conditions as EC
+WebDriverWait(driver, 2).until(EC.presence_of_element_located((AppiumBy.ACCESSIBILITY_ID, 'Create contact')))
+
+// implicit wait
+driver.implicitly_wait(5)
+
 
 ```
 

@@ -20,19 +20,15 @@ capabilities = {
 }
 
 # Start Appium Server programmatically
-appium_service = AppiumService()
-appium_service.start()
-
-print(appium_service.is_running)
-print(appium_service.is_listening)
+# appium_service = AppiumService()
+# appium_service.start()
+#
+# print(appium_service.is_running)
+# print(appium_service.is_listening)
 
 appium_server_url = 'http://localhost:4723'
 
-options = UiAutomator2Options()
-options.load_capabilities(capabilities)
-
-driver = webdriver.Remote(appium_server_url, options=options, direct_connection=True)
-driver.implicitly_wait(5)
+driver = webdriver.Remote(appium_server_url, options=UiAutomator2Options().load_capabilities(capabilities))
 
 driver.get('http://wikipedia.com')
 print(driver.title)
@@ -49,6 +45,6 @@ for option in options:
 
 time.sleep(2)
 driver.quit()
-appium_service.stop()
+# appium_service.stop()
 
 

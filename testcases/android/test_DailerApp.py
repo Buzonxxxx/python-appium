@@ -23,7 +23,6 @@ options = UiAutomator2Options()
 options.load_capabilities(capabilities)
 
 driver = webdriver.Remote(appium_server_url, options=options, direct_connection=True)
-driver.implicitly_wait(5)
 
 # driver.press_keycode()
 

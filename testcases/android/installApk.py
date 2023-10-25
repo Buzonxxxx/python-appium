@@ -27,11 +27,7 @@ capabilities = {
 
 appium_server_url = 'http://localhost:4723'
 
-options = UiAutomator2Options()
-options.load_capabilities(capabilities)
-
-driver = webdriver.Remote(appium_server_url, options=options, direct_connection=True)
-driver.implicitly_wait(5)
+driver = webdriver.Remote(appium_server_url, options=UiAutomator2Options().load_capabilities(capabilities))
 
 time.sleep(2)
 driver.quit()
