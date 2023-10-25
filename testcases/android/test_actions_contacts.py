@@ -3,7 +3,7 @@ import time
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
-from testcases.android.scroll_util import ScrollUtil
+from testcases.android.actions_util import ActionsUtil
 
 '''
 
@@ -21,14 +21,26 @@ capabilities = {
 driver = webdriver.Remote('http://localhost:4723', options=UiAutomator2Options().load_capabilities(capabilities))
 
 driver.find_element(AppiumBy.ID, 'android:id/button2').click()
+time.sleep(1)
 
-# Scroll from bottom to top (enable Pointer Location in Developer Options)
-ScrollUtil.swipeUp(2, driver)
+
+# Note: Enable Pointer Location in Developer Options
+
+# Drag and Drop
+# names = driver.find_elements(AppiumBy.ID, 'com.google.android.contacts:id/cliv_name_textview')
+# ActionsUtil.dragAndDrop(names[0], names[5], driver)
+
+# Long press
+# anney = driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'text("Anney")')
+# ActionsUtil.longPress(anney, driver)
+
+# Scroll from bottom to top
+ActionsUtil.swipeUp(2, driver)
 
 # Scroll into view
-# ScrollUtil.scrollToTextByAndroidUIAutomator('Lucas', driver)
+# ActionsUtil.scrollToTextByAndroidUIAutomator('Lucas', driver)
 
-driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'text("Lucas")').click()
+# driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'text("Anney")').click()
 
 time.sleep(2)
 driver.quit()
