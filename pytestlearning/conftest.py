@@ -5,6 +5,7 @@ import allure
 import pytest
 from appium.options.android import UiAutomator2Options
 
+# The conftest.py file serves as a means of providing fixtures for an entire directory.
 
 @pytest.fixture(scope="function")
 def appium_driver():

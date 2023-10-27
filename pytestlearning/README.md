@@ -23,5 +23,11 @@
 - `pytest test_validate_titles.py --alluredir="./allurereports"` 
 - `allure serve ./allurereports`
 - Save screenshot `allure.attach(driver.get_screenshot_as_png(), name='screenshot', attachment_type=AttachmentType.PNG)`
-- 
+
+#### Get Screenshot when test failure
+1. Add `conftest.py`
+   - The `conftest.py` file serves as a means of providing fixtures for an entire directory.
+2. See sample `test_appium_integration.py`
+3. Run `pytest test_validate_titles.py --alluredir="./allurereports"` 
+4. Run `allure serve ./allurereports`
 
