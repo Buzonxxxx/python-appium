@@ -5,8 +5,8 @@ from appium.webdriver.common.touch_action import TouchAction
 class ActionsUtil:
     @staticmethod
     def scrollToTextByAndroidUIAutomator(text, driver):
-        scroll_command = "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new " \
-                         "UiSelector().textContains(\"+text+\").instance(0))"
+        scroll_command = f"new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector(" \
+                         f").textContains(\"{text}\").instance(0))"
         driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, scroll_command).click()
 
     @staticmethod
