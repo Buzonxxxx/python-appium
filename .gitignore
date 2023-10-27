@@ -1,3 +1,5 @@
 .DS_Store
 allurereports
 testreports.html
+assets
+__pycache__
