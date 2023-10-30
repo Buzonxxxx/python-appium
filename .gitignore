@@ -3,3 +3,4 @@ allurereports
 testreports.html
 assets
 __pycache__
+logs

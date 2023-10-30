@@ -86,5 +86,35 @@ driver.implicitly_wait(5)
 
 
 ```
+## Utilities
+#### Add log utilities
+1. Add `generating_logs.py`
+    ```
+    def log():
+        logging.basicConfig(filename="../logs/logfile.log", format='%(asctime)s: %(levelname)s - %(message)s',
+                            datefmt='%m/%d/%Y %I:%M:%S %p',
+                            level=logging.INFO)
+    
+        logger = logging.getLogger()
+    
+        return logger
+    ```
+#### Add Config Reader
+1. Add `config.ini`
+    ```
+   [basic info]
+    testsiteurl=http://gmail.com
+    browser=chrome
+    implicit.wait=10
+    explicit.wait=5
+   ```
+2. Add `reader.py`
+    ```pycon
+    def readConfig(section, key):
+        config = ConfigParser()
+        config.read('config.ini')
+        return config.get(section, key)
+    ```
+
 
 
