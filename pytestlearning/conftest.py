@@ -8,6 +8,37 @@ from appium.options.android import UiAutomator2Options
 
 # The conftest.py file serves as a means of providing fixtures for an entire directory.
 
+# for parallel test
+# @pytest.fixture(params=["device1", "device2"], scope="function")
+# def appium_driver(request):
+#     if request.param == "device1":
+#         capabilities = {
+#             'deviceName': 'Pixel 4 API 34',
+#             'platformName': 'Android',
+#             'automationName': 'UiAutomator2',
+#             'platformVersion': '14.0',
+#             'browserName': 'Chrome',
+#             'udid': 'emulator-5556'
+#         }
+#         driver = webdriver.Remote('http://localhost:4724',
+#                                   options=UiAutomator2Options().load_capabilities(capabilities))
+#     if request.param == "device2":
+#         capabilities = {
+#             'deviceName': 'Pixel 4 API 34-2',
+#             'platformName': 'Android',
+#             'automationName': 'UiAutomator2',
+#             'platformVersion': '14.0',
+#             'browserName': 'Chrome',
+#             'udid': 'emulator-5560'
+#         }
+#         driver = webdriver.Remote('http://localhost:4725',
+#                                   options=UiAutomator2Options().load_capabilities(capabilities))
+#
+#     yield driver
+#     time.sleep(2)
+#     driver.quit()
+
+
 @pytest.fixture(scope="function")
 def appium_driver():
     capabilities = {
