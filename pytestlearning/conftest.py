@@ -17,10 +17,11 @@ from appium.options.android import UiAutomator2Options
 #             'platformName': 'Android',
 #             'automationName': 'UiAutomator2',
 #             'platformVersion': '14.0',
-#             'browserName': 'Chrome',
+#             'browserName': 'com.google.android.contacts',
+#             'appActivity': 'com.google.android.apps.contacts.activities.PeopleActivity',
 #             'udid': 'emulator-5556'
 #         }
-#         driver = webdriver.Remote('http://localhost:4724',
+#         driver = webdriver.Remote('http://localhost:4444',
 #                                   options=UiAutomator2Options().load_capabilities(capabilities))
 #     if request.param == "device2":
 #         capabilities = {
@@ -28,10 +29,11 @@ from appium.options.android import UiAutomator2Options
 #             'platformName': 'Android',
 #             'automationName': 'UiAutomator2',
 #             'platformVersion': '14.0',
-#             'browserName': 'Chrome',
+#             'appPackage': 'com.google.android.contacts',
+#             'appActivity': 'com.google.android.apps.contacts.activities.PeopleActivity',
 #             'udid': 'emulator-5560'
 #         }
-#         driver = webdriver.Remote('http://localhost:4725',
+#         driver = webdriver.Remote('http://localhost:4444',
 #                                   options=UiAutomator2Options().load_capabilities(capabilities))
 #
 #     yield driver

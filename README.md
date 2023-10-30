@@ -163,3 +163,134 @@ driver.implicitly_wait(5)
        return myresult[0]
    ```
 
+## Parallel Execution - Use py-xdist
+1. Install `pytest-xdist`
+2. Add `addopts = -n2` in `pytest.ini`
+3. Update `conftest.yp`
+    ```pycon
+   @pytest.fixture(params=["device1", "device2"], scope="function")
+    def appium_driver(request):
+    if request.param == "device1":
+        capabilities = {
+            'deviceName': 'Pixel 4 API 34',
+            'platformName': 'Android',
+            'automationName': 'UiAutomator2',
+            'platformVersion': '14.0',
+            'browserName': 'Chrome',
+            'udid': 'emulator-5556'
+        }
+        driver = webdriver.Remote('http://localhost:4724',
+                                  options=UiAutomator2Options().load_capabilities(capabilities))
+    if request.param == "device2":
+        capabilities = {
+            'deviceName': 'Pixel 4 API 34-2',
+            'platformName': 'Android',
+            'automationName': 'UiAutomator2',
+            'platformVersion': '14.0',
+            'browserName': 'Chrome',
+            'udid': 'emulator-5560'
+        }
+        driver = webdriver.Remote('http://localhost:4725',
+                                  options=UiAutomator2Options().load_capabilities(capabilities))
+
+    yield driver
+    time.sleep(2)
+    driver.quit()
+   ```
+4. Launch multiple appium servers
+5. Run the test
+
+## Run parallel test using Selenium Grid
+1. Download Selenium Grid stable version
+2. Add `addopts = -n2` in `pytest.ini`
+3. Update `conftest.py` (modify port to 4444)
+   ```pycon
+   @pytest.fixture(params=["device1", "device2"], scope="function")
+   def appium_driver(request):
+    if request.param == "device1":
+        capabilities = {
+            'deviceName': 'Pixel 4 API 34',
+            'platformName': 'Android',
+            'automationName': 'UiAutomator2',
+            'platformVersion': '14.0',
+            'browserName': 'com.google.android.contacts',
+            'appActivity': 'com.google.android.apps.contacts.activities.PeopleActivity',
+            'udid': 'emulator-5556'
+        }
+        driver = webdriver.Remote('http://localhost:4444',
+                                  options=UiAutomator2Options().load_capabilities(capabilities))
+    if request.param == "device2":
+        capabilities = {
+            'deviceName': 'Pixel 4 API 34-2',
+            'platformName': 'Android',
+            'automationName': 'UiAutomator2',
+            'platformVersion': '14.0',
+            'appPackage': 'com.google.android.contacts',
+            'appActivity': 'com.google.android.apps.contacts.activities.PeopleActivity',
+            'udid': 'emulator-5560'
+        }
+        driver = webdriver.Remote('http://localhost:4444',
+                                  options=UiAutomator2Options().load_capabilities(capabilities))
+
+    yield driver
+    time.sleep(2)
+    driver.quit()
+   ```
+4. Create `appium1.yml`
+   ```yaml
+   # appium1.yml
+   server:
+   port: 4724
+   use-drivers:
+      - UiAutomator2
+   ```
+5. Create `appium2.yml`
+   ```yaml
+   # appium1.yml
+   server:
+   port: 4725
+   use-drivers:
+      - UiAutomator2
+   ```
+6. Create `node1.toml`
+   ```toml
+   # node1.toml
+   [server]
+   port = 5555
+   
+   [node]
+   detect-drivers = false
+   
+   [relay]
+   url = "http://localhost:4724"
+   status-endpoint = "/status"
+   configs = [
+       "1", "{\"platformName\": \"Android\", \"appium:platformVersion\": \"14.0\", \"appium:deviceName\": \"Pixel 4 API 34\", \"appium:automationName\": \"UiAutomator2\"}"
+   ]
+   ```
+7. Create `node2.toml`
+   ```toml
+   # node2.toml
+   [server]
+   port = 5565
+   
+   [node]
+   detect-drivers = false
+   
+   [relay]
+   url = "http://localhost:4725"
+   status-endpoint = "/status"
+   configs = [
+       "1", "{\"platformName\": \"Android\", \"appium:platformVersion\": \"14.0\", \"appium:deviceName\": \"Pixel 4 API 34-2\", \"appium:automationName\": \"UiAutomator2\"}"
+   ]
+   ```
+8. Launch all of services
+   ```bash
+   appium --config appium1.yml
+   appium --config appium2.yml
+   java -jar /path/to/selenium.jar node --config node1.toml
+   java -jar /path/to/selenium.jar node --config node2.toml
+   java -jar /path/to/selenium.jar hub 
+   ```
+9. Check Selenium Grid in `http://localhost:4444/`
+Note: If the test did not run, try wipe emulator and launch it again
