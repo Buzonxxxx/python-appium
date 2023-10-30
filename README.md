@@ -116,7 +116,8 @@ driver.implicitly_wait(5)
         return config.get(section, key)
     ```
 #### Read and Write Excel(.xlsx) file
-1. Read excel
+1. Install `openpyxl`
+2. Read excel
    ```pycon
    import openpyxl
 
@@ -126,7 +127,7 @@ driver.implicitly_wait(5)
    print(f'total rows are: {total_rows}, and total cols are: {total_cols}')
    total_cols = sheet.max_column
    ```
-2. Write excel
+3. Write excel
    ```pycon
    import openpyxl
 
@@ -136,5 +137,29 @@ driver.implicitly_wait(5)
    sheet.cell(row=2, column=3).value = 'age'
    workbook.save('./new.xlsx')
    ```
-
+#### Interact with DB(mysql)
+1. Install `mysql-connector-python`
+2. Sample
+   ```pycon
+   import mysql.connector
+   
+   
+   def createDbConnection():
+       global mydb
+       mydb = mysql.connector.connect(
+   
+           host="localhsot",
+           user="root",
+           password="selenium",
+           database="pydb"
+   
+       )
+   
+   
+   def getMysqlQuery(query):
+       mycusor = mydb.cursor()
+       mycusor.execute(query)
+       myresult = mycusor.fetchone()
+       return myresult[0]
+   ```
 
