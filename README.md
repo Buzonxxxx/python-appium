@@ -115,6 +115,26 @@ driver.implicitly_wait(5)
         config.read('config.ini')
         return config.get(section, key)
     ```
+#### Read and Write Excel(.xlsx) file
+1. Read excel
+   ```pycon
+   import openpyxl
 
+   workbook = openpyxl.load_workbook('Chiuhsien.xlsx')
+   sheet = workbook['Quiz']
+   total_rows = sheet.max_row
+   print(f'total rows are: {total_rows}, and total cols are: {total_cols}')
+   total_cols = sheet.max_column
+   ```
+2. Write excel
+   ```pycon
+   import openpyxl
+
+   workbook = openpyxl.load_workbook('sample.xlsx')
+   sheet = workbook['Quiz']
+   
+   sheet.cell(row=2, column=3).value = 'age'
+   workbook.save('./new.xlsx')
+   ```
 
 

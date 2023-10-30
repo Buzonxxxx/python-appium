@@ -13,6 +13,7 @@ capabilities = {
     'automationName': 'UiAutomator2',
     'platformVersion': '14.0',
     'appPackage': 'com.android.chrome',
+    # 'noReset': True,
     'appActivity': 'org.chromium.chrome.browser.ChromeTabbedActivity'
 }
 driver = webdriver.Remote('http://localhost:4723', options=UiAutomator2Options().load_capabilities(capabilities))
