@@ -41,8 +41,25 @@ from appium.options.android import UiAutomator2Options
 #     driver.quit()
 
 
+# @pytest.fixture(scope="function")
+# def appium_driver():
+#     capabilities = {
+#         'deviceName': 'Pixel 4 API 34',
+#         'platformName': 'Android',
+#         'automationName': 'UiAutomator2',
+#         'platformVersion': '14.0',
+#         'appPackage': 'com.google.android.contacts',
+#         'appActivity': 'com.google.android.apps.contacts.activities.PeopleActivity'
+#     }
+#     appium_server_url = 'http://localhost:4723'
+#     driver = webdriver.Remote(appium_server_url, options=UiAutomator2Options().load_capabilities(capabilities))
+#     yield driver
+#     time.sleep(2)
+#     driver.quit()
+
+# For Page Obj Test
 @pytest.fixture(scope="function")
-def appium_driver():
+def appium_driver(request):
     capabilities = {
         'deviceName': 'Pixel 4 API 34',
         'platformName': 'Android',
@@ -51,8 +68,10 @@ def appium_driver():
         'appPackage': 'com.google.android.contacts',
         'appActivity': 'com.google.android.apps.contacts.activities.PeopleActivity'
     }
-    appium_server_url = 'http://localhost:4723'
-    driver = webdriver.Remote(appium_server_url, options=UiAutomator2Options().load_capabilities(capabilities))
+    driver = webdriver.Remote('http://localhost:4723',
+                              options=UiAutomator2Options().load_capabilities(capabilities))
+    request.cls.driver = driver
+    driver.implicitly_wait(10)
     yield driver
     time.sleep(2)
     driver.quit()
