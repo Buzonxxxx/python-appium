@@ -1,6 +1,7 @@
 
 
  `pytest test_marker_example.py -s -v -k login`
+ 
  `pytest test_marker_example.py -s -v -k "not login"` 
  
 #### Register marker
@@ -17,12 +18,12 @@
 
 #### Allure Report
 - Doc: https://allurereport.org/docs/gettingstarted/installation/
-- `brew install allure`
-- `pip3 install allure-pytest`
--  Create `allurereports` folder
-- `pytest test_validate_titles.py --alluredir="./allurereports"` 
-- `allure serve ./allurereports`
-- Save screenshot `allure.attach(driver.get_screenshot_as_png(), name='screenshot', attachment_type=AttachmentType.PNG)`
+1. `brew install allure`
+2. `pip3 install allure-pytest`
+3. Create `allurereports` folder
+4. `pytest test_validate_titles.py --alluredir="./allurereports"` 
+5. `allure serve ./allurereports`
+6. Save screenshot `allure.attach(driver.get_screenshot_as_png(), name='screenshot', attachment_type=AttachmentType.PNG)`
 
 #### Get Screenshot when test failure
 1. Add `conftest.py`

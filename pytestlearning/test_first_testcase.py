@@ -1,6 +1,3 @@
-import pytest
-
-
 def setup_module(module):
     print("creating DB connection")
 

@@ -166,7 +166,7 @@ driver.implicitly_wait(5)
 ## Parallel Execution - Use py-xdist
 1. Install `pytest-xdist`
 2. Add `addopts = -n2` in `pytest.ini`
-3. Update `conftest.yp`
+3. Update `conftest.py`
     ```pycon
    @pytest.fixture(params=["device1", "device2"], scope="function")
     def appium_driver(request):
@@ -293,4 +293,5 @@ driver.implicitly_wait(5)
    java -jar /path/to/selenium.jar hub 
    ```
 9. Check Selenium Grid in `http://localhost:4444/`
+
 Note: If the test did not run, try wipe emulator and launch it again
